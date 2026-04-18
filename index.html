@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Orbit Control</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">C Drive Control Layer</div>
+          <h1>Research Orbit Control</h1>
+          <p>
+            <strong>Unknown problem identified:</strong> portfolio entropy on <code>C:\</code>. You have enough projects,
+            apps, and domain fragments to build several frontier systems, but not enough orchestration to know what
+            should merge, what should ship, and what should die. This app turns the drive itself into a ranked
+            operating model.
+          </p>
+        </div>
+        <div class="tag-row">
+          <a class="btn btn-secondary" href="plan.html">Open plan</a>
+          <a class="btn btn-primary" href="#validation">Run validation</a>
+        </div>
+      </div>
+      <div class="hero-stats" id="heroStats"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Snapshot Control</h2>
+          <p class="muted">
+            Load <code>C:\</code>, <code>C:\Projects</code>, or <code>C:\HTML apps</code> to update the matching slice of the
+            bundled snapshot. Export or import full snapshots as JSON.
+          </p>
+        </div>
+        <div class="control-row">
+          <button class="btn btn-secondary" id="loadFolderBtn" type="button">Load live folder</button>
+          <button class="btn btn-secondary" id="exportSnapshotBtn" type="button">Export snapshot</button>
+          <button class="btn btn-secondary" id="importSnapshotBtn" type="button">Import snapshot</button>
+          <button class="btn btn-secondary" id="resetSnapshotBtn" type="button">Reset bundled snapshot</button>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Snapshot status</div>
+        <p id="snapshotStatus" class="tiny"></p>
+      </div>
+      <input id="importSnapshotInput" type="file" accept="application/json" hidden>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>C Drive Telemetry</h2>
+          <p class="muted">
+            This is the current research estate distilled into observability metrics rather than a raw folder dump.
+          </p>
+        </div>
+      </div>
+      <div class="telemetry-grid" id="telemetryGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Unknown Problem Hypotheses</h2>
+          <p class="muted">
+            The app ranks latent failure modes. The winner is the hidden problem the drive is most strongly signaling.
+          </p>
+        </div>
+      </div>
+      <div class="problem-grid" id="problemGrid"></div>
+      <div class="grid two" style="margin-top:1rem;">
+        <div class="list-card">
+          <div class="metric-label">Problem order</div>
+          <div class="list-stack" id="problemList"></div>
+        </div>
+        <div class="list-card">
+          <div class="metric-label">Drive diagnosis</div>
+          <pre id="diagnosisMemo"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Theme Constellation</h2>
+          <p class="muted">
+            Themes with high dark-matter scores have real assets trapped behind weak orchestration.
+          </p>
+        </div>
+      </div>
+      <div class="theme-grid" id="themeGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Duplicate Gravity</h2>
+          <p class="muted">
+            Repeated token families often indicate merge candidates, shadow versions, or fragmented lines of work.
+          </p>
+        </div>
+      </div>
+      <div class="grid two">
+        <div class="list-card">
+          <div class="metric-label">Strongest families</div>
+          <div class="list-stack" id="familyList"></div>
+        </div>
+        <div class="list-card">
+          <div class="metric-label">Dark-matter assets</div>
+          <div class="list-stack" id="assetList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Fusion Programs</h2>
+          <p class="muted">
+            These are not topic summaries. They are executable programs assembled from the drive you already have.
+          </p>
+        </div>
+      </div>
+      <div class="program-grid" id="programGrid"></div>
+      <div class="grid two" style="margin-top:1rem;">
+        <div class="list-card">
+          <div class="metric-label">Program queue</div>
+          <div class="list-stack" id="programList"></div>
+        </div>
+        <div class="list-card">
+          <div class="metric-label">Merge or retire queue</div>
+          <div class="list-stack" id="mergeQueue"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Intervention Studio</h2>
+          <p class="muted">
+            Tune how the control layer thinks: impact, execution speed, asset reuse, novelty, and governance.
+          </p>
+        </div>
+      </div>
+      <div class="studio-grid">
+        <div class="list-card">
+          <label class="metric-label" for="archetypeSelect">Strategy stance</label>
+          <select id="archetypeSelect" class="full-select"></select>
+          <div class="slider-row">
+            <strong>Impact</strong>
+            <input id="impactRange" type="range" min="0" max="100" value="92">
+            <span id="impactValue">92</span>
+          </div>
+          <div class="slider-row">
+            <strong>Execution</strong>
+            <input id="executionRange" type="range" min="0" max="100" value="78">
+            <span id="executionValue">78</span>
+          </div>
+          <div class="slider-row">
+            <strong>Reuse</strong>
+            <input id="reuseRange" type="range" min="0" max="100" value="88">
+            <span id="reuseValue">88</span>
+          </div>
+          <div class="slider-row">
+            <strong>Novelty</strong>
+            <input id="noveltyRange" type="range" min="0" max="100" value="70">
+            <span id="noveltyValue">70</span>
+          </div>
+          <div class="slider-row">
+            <strong>Governance</strong>
+            <input id="governanceRange" type="range" min="0" max="100" value="94">
+            <span id="governanceValue">94</span>
+          </div>
+        </div>
+        <div class="list-card">
+          <div class="metric-label">Current tuned recommendation</div>
+          <div id="tunedInsight" class="studio-note"></div>
+          <div class="metric-label" style="margin-top:1rem;">Action memo</div>
+          <pre id="actionMemo"></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="validation">
+      <div class="section-head">
+        <div>
+          <h2>WebR Validation</h2>
+          <p class="muted">
+            WebR independently checks portfolio totals and the top-ranked problem, theme, and fusion program.
+          </p>
+        </div>
+        <div class="control-row">
+          <span class="status-badge" id="webrStatus">Not loaded</span>
+          <button class="btn btn-primary" id="runValidationBtn" type="button">Run WebR validation</button>
+          <button class="btn btn-secondary" id="copyScriptBtn" type="button">Copy R script</button>
+        </div>
+      </div>
+      <div class="validation-grid">
+        <div class="validation-card">
+          <div class="metric-label">Validation progress</div>
+          <div id="progressWrap" style="display:none; margin-top:0.8rem;">
+            <progress id="progressBar" value="0" max="100"></progress>
+            <p id="progressText" class="tiny"></p>
+          </div>
+          <div id="validationResults" class="tiny" style="margin-top:0.85rem;">No validation run yet.</div>
+        </div>
+        <div class="validation-card">
+          <div class="metric-label">R script preview</div>
+          <pre id="scriptPreview"></pre>
+        </div>
+      </div>
+      <div class="footer-note">
+        Bundled snapshot built from the current <code>C:\</code>, <code>C:\Projects</code>, and <code>C:\HTML apps</code> inventories.
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
