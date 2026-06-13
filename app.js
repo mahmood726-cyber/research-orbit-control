@@ -513,7 +513,8 @@ function scaleLinear(value, min, max) {
 }
 
 function round1(value) {
-  return Number((Number(value) || 0).toFixed(1));
+  const n = Number(value);
+  return Number((Number.isFinite(n) ? n : 0).toFixed(1));
 }
 
 function escapeHtml(value) {
@@ -860,13 +861,18 @@ function normalizeWeights(weights) {
   };
 }
 
+function toWeight(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
 function getWeightState() {
   const raw = {
-    impact: Number(appState.ui.weights.impact) || 0,
-    execution: Number(appState.ui.weights.execution) || 0,
-    reuse: Number(appState.ui.weights.reuse) || 0,
-    novelty: Number(appState.ui.weights.novelty) || 0,
-    governance: Number(appState.ui.weights.governance) || 0
+    impact: toWeight(appState.ui.weights.impact),
+    execution: toWeight(appState.ui.weights.execution),
+    reuse: toWeight(appState.ui.weights.reuse),
+    novelty: toWeight(appState.ui.weights.novelty),
+    governance: toWeight(appState.ui.weights.governance)
   };
   return { raw, normalized: normalizeWeights(raw) };
 }
@@ -1269,11 +1275,11 @@ function applyArchetype(id) {
 
 function syncWeightsFromRanges() {
   appState.ui.weights = {
-    impact: Number(refs.impactRange.value) || 0,
-    execution: Number(refs.executionRange.value) || 0,
-    reuse: Number(refs.reuseRange.value) || 0,
-    novelty: Number(refs.noveltyRange.value) || 0,
-    governance: Number(refs.governanceRange.value) || 0
+    impact: toWeight(refs.impactRange.value),
+    execution: toWeight(refs.executionRange.value),
+    reuse: toWeight(refs.reuseRange.value),
+    novelty: toWeight(refs.noveltyRange.value),
+    governance: toWeight(refs.governanceRange.value)
   };
   appState.ui.archetype = "custom";
   refs.archetypeSelect.value = "custom";
